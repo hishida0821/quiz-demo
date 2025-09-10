@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 3.2rem;
+  text-align: center;
+  background: #000000;
+}
+
+.section {
+  padding: 100px 0;
+}
+.section_inner {
+  width: 100%;
+  max-width: 1064px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.quiz_block_head {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 0 48px;
+}
+.quiz_block_body {
+  margin-top: 32px;
+}
+.quiz_question_detail {
+  padding: 48px 32px;
+  background: #000000;
+}
+.quiz_question_text {
+  color: #ffffff;
+}
+.quiz_answer_list {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 16px;
+  padding: 48px 32px;
+  background: #000000;
+}
+.quiz_answer_item button {
+  display: block;
+  color: #000000;
+  font-size: 2rem;
+  text-align: left;
+  width: 100%;
+  padding: 8px 16px;
+  background: #ffffff;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.quiz_answer_item.selected button {
+  color: #ffffff;
+  background: #000000;
+  border: 3px solid #ffffff;
+}
+.quiz_next_button {
+  display: block;
+  color: #ffffff;
+  font-size: 2rem;
+  text-align: center;
+  width: 480px;
+  margin: 64px auto 0;
+  padding: 8px;
+  background: #000000;
+}
+.quiz_next_button.active {
+  color: #000000;
+  background: #ffffff;
+  border: 3px solid #000000;
+}
+
+a.back {
+  display: block;
+  color: #ffffff;
+  font-size: 3.2rem;
+  font-weight: bold;
+  text-align: center;
+  width: 480px;
+  margin: 80px auto 0;
+  padding: 8px 32px;
+  background: #ff0000;
+}

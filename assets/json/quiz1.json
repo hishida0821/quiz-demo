@@ -1,0 +1,25 @@
+[
+  {
+    "id": "01",
+    "talk": "トーク1テキストトーク1テキストトーク1テキストトーク1テキストトーク1テキストトーク1テキスト",
+    "talkAnswer": [
+      "talkAnswer1",
+      "talkAnswer2",
+      "talkAnswer3"
+    ],
+    "quiz": [
+      "quizText1quizText1quizText1quizText1quizText1",
+      "quizText2quizText2quizText2quizText2quizText2",
+      "quizText3quizText3quizText3quizText3quizText3"
+    ],
+    "quizText": "<br><br>クイズ1固定テキストクイズ1固定テキストクイズ1固定テキストクイズ1固定テキスト",
+    "quizChoice": [
+      "quizChoice1",
+      "quizChoice2",
+      "quizChoice3"
+    ],
+    "quizCorrect": "正解！<br><br>クイズ正解テキストクイズ正解テキストクイズ正解テキスト",
+    "quizIncorrect": "残念！<br><br>クイズ不正解テキストクイズ不正解テキストクイズ不正解テキスト",
+    "quizAnswer": 1
+  }
+]
