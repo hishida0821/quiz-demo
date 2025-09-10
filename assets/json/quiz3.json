@@ -1,7 +1,7 @@
 [
   {
     "id": "03",
-    "talk": "トーク1テキストトーク1テキストトーク1テキストトーク1テキストトーク1テキストトーク1テキスト",
+    "talk": "トーク3テキストトーク3テキストトーク3テキストトーク3テキストトーク3テキストトーク3テキスト",
     "talkAnswer": [
       "talkAnswer1",
       "talkAnswer2",
@@ -12,13 +12,12 @@
       "quizText2quizText2quizText2quizText2quizText2",
       "quizText3quizText3quizText3quizText3quizText3"
     ],
+    "quizText": "クイズ固定のテキストクイズ固定の問題テキストクイズ固定の問題テキストクイズ固定の問題テキストクイズ固定の問題テキスト",
     "quizChoice": [
       "quizChoice1",
       "quizChoice2",
       "quizChoice3"
     ],
-    "quizCorrect": "正解！<br><br>クイズ正解テキストクイズ正解テキストクイズ正解テキスト",
-    "quizIncorrect": "残念！<br><br>クイズ不正解テキストクイズ不正解テキストクイズ不正解テキスト",
-    "quizAnswer": 1
+    "quizAnswer": 3
   }
 ]

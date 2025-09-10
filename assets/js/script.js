@@ -12,10 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			.then(data => {
 				if (!Array.isArray(data) || data.length === 0) return;
 				const quiz = data[0];
-				// talkを.quiz_question_textに反映
+				// talk/talkAnswerが「配列かつ各要素も配列（連想配列的）」か判定
 				const questionText = document.querySelector('.quiz_question_text');
-				if (questionText && quiz.talk) {
-					questionText.textContent = quiz.talk;
+				const isMultiTalk = Array.isArray(quiz.talk) && Array.isArray(quiz.talkAnswer) && Array.isArray(quiz.talkAnswer[0]);
+				let talkArr = isMultiTalk ? quiz.talk : [quiz.talk];
+				let talkAnswerArr = isMultiTalk ? quiz.talkAnswer : [quiz.talkAnswer];
+				let talkStep = 0;
+				if (questionText && talkArr[talkStep]) {
+					questionText.innerHTML = talkArr[talkStep];
 				}
 				// idをimgのsrcの{quiz_id}に反映
 				const img = document.querySelector('.quiz_question_image img');
@@ -25,8 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				// talkAnswerを.quiz_answer_listにmapで表示
 				const answerList = document.querySelector('.quiz_answer_list');
-				if (answerList && Array.isArray(quiz.talkAnswer)) {
-					answerList.innerHTML = quiz.talkAnswer.map((answer, idx) =>
+				if (answerList && talkAnswerArr[talkStep]) {
+					let arr = Array.isArray(talkAnswerArr[talkStep]) ? talkAnswerArr[talkStep] : [talkAnswerArr[talkStep]];
+					answerList.innerHTML = arr.map((answer, idx) =>
 						`<li class="quiz_answer_item" data-answer="${idx + 1}"><button>${answer}</button></li>`
 					).join('');
 				}
@@ -47,19 +52,60 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 				});
 
-				// 次へボタンでquiz/quizChoice反映
+				// 次へボタンでtalk/talkAnswerを順送り、複数ある場合のみ順送り、1つずつなら従来通りquizへ
 				const nextBtn = document.querySelector('.quiz_next_button');
 				if (nextBtn) {
 					let isQuizPhase = false;
 					nextBtn.addEventListener('click', () => {
 						if (selectedIdx === null) return;
-						// talkとtalkAnswerが表示されているときはアラートを出さず、quiz/quizChoice表示に切り替えるだけ
-						if (!isQuizPhase) {
+						if (!isQuizPhase && isMultiTalk) {
+							// talk/talkAnswerのstepを進める
+							talkStep++;
+							if (talkArr[talkStep] && talkAnswerArr[talkStep]) {
+								// 次のtalk/talkAnswerを表示
+								questionText.innerHTML = talkArr[talkStep];
+								let arr = Array.isArray(talkAnswerArr[talkStep]) ? talkAnswerArr[talkStep] : [talkAnswerArr[talkStep]];
+								answerList.innerHTML = arr.map((answer, idx) =>
+									`<li class=\"quiz_answer_item\" data-answer=\"${idx + 1}\"><button>${answer}</button></li>`
+								).join('');
+								// 選択状態リセット
+								answerList.querySelectorAll('.quiz_answer_item').forEach(item => item.classList.remove('selected'));
+								selectedIdx = null;
+								nextBtn.classList.remove('active');
+								return;
+							} else {
+								// talk/talkAnswerが終わったらquiz/quizChoiceへ
+								isQuizPhase = true;
+								// quiz内n番目のテキストとquizTextを.quiz_question_textに
+								if (Array.isArray(quiz.quiz) && quiz.quiz[selectedIdx]) {
+									let text = quiz.quiz[selectedIdx];
+									if (quiz.quizText) {
+										text += '\n' + '<br><br>' + quiz.quizText;
+									}
+									questionText.innerHTML = text;
+								}
+								// quizChoiceの値をbuttonに
+								if (Array.isArray(quiz.quizChoice)) {
+									const btns = answerList.querySelectorAll('button');
+									btns.forEach((btn, idx) => {
+										btn.textContent = quiz.quizChoice[idx] || '';
+									});
+								}
+								// quiz_next_buttonのテキストを「答える」に変更
+								nextBtn.innerHTML = '答える';
+								// 選択状態リセット
+								answerList.querySelectorAll('.quiz_answer_item').forEach(item => item.classList.remove('selected'));
+								selectedIdx = null;
+								nextBtn.classList.remove('active');
+								return;
+							}
+						} else if (!isQuizPhase && !isMultiTalk) {
+							// talk/talkAnswerが1つずつの場合は従来通りquizへ
 							// quiz内n番目のテキストとquizTextを.quiz_question_textに
 							if (Array.isArray(quiz.quiz) && quiz.quiz[selectedIdx]) {
 								let text = quiz.quiz[selectedIdx];
 								if (quiz.quizText) {
-									text += '\n' + quiz.quizText;
+									text += '\n' + '<br><br>' + quiz.quizText;
 								}
 								questionText.innerHTML = text;
 							}
@@ -76,11 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
 							// 選択状態リセット
 							answerList.querySelectorAll('.quiz_answer_item').forEach(item => item.classList.remove('selected'));
 							selectedIdx = null;
-							// quiz_next_buttonのクラス削除
 							nextBtn.classList.remove('active');
 							return;
 						}
-						// 2回目以降（quizChoice表示時）は正誤判定
+						// quiz/quizChoice表示時は正誤判定
 						setTimeout(() => {
 							const selectedLi = answerList.querySelector('.quiz_answer_item.selected');
 							if (selectedLi && quiz.quizAnswer) {
@@ -95,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
 							// 選択状態リセット
 							answerList.querySelectorAll('.quiz_answer_item').forEach(item => item.classList.remove('selected'));
 							selectedIdx = null;
-							// quiz_next_buttonのクラス削除
 							nextBtn.classList.remove('active');
 						}, 0);
 					});

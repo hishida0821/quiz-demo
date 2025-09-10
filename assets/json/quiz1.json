@@ -1,25 +1,23 @@
 [
   {
     "id": "01",
-    "talk": "トーク1テキストトーク1テキストトーク1テキストトーク1テキストトーク1テキストトーク1テキスト",
+    "talk": "でも、農業ってやっぱり大変そう・・・<br>だけどみんなが口にする食材を自分がつくるっていうのはやりがいありそうだよね！",
     "talkAnswer": [
-      "talkAnswer1",
-      "talkAnswer2",
-      "talkAnswer3"
+      "たしかに、でも虫とか苦手だから・・・",
+      "わかる！そういうのいいよね！興味出てきたかも。",
+      "つくるより食べる専門かなー"
     ],
     "quiz": [
-      "quizText1quizText1quizText1quizText1quizText1",
-      "quizText2quizText2quizText2quizText2quizText2",
-      "quizText3quizText3quizText3quizText3quizText3"
+      "私も虫は苦手・・・でも、それでもちょっと興味あるんだよなあ。",
+      "一緒！私も農業にちょっと興味あるんだよね！",
+      "私もたべるの大好き！だからこそちょっと興味あるんだよね！"
     ],
-    "quizText": "<br><br>クイズ1固定テキストクイズ1固定テキストクイズ1固定テキストクイズ1固定テキスト",
+    "quizText": "じゃあ、ここで問題！農業未経験者のうち、「農業を体験してみたい」という意向が高いのは、若者（10～20代）と50代、どちらだと思う？",
     "quizChoice": [
-      "quizChoice1",
-      "quizChoice2",
-      "quizChoice3"
+      "10～20代の若者じゃないかな。",
+      "うーん、50代くらい。",
+      "どちらも同じくらいな気がする。"
     ],
-    "quizCorrect": "正解！<br><br>クイズ正解テキストクイズ正解テキストクイズ正解テキスト",
-    "quizIncorrect": "残念！<br><br>クイズ不正解テキストクイズ不正解テキストクイズ不正解テキスト",
     "quizAnswer": 1
   }
 ]
